@@ -80,6 +80,12 @@ class Env0ApiClient(
  
 
 if __name__ == '__main__':
+    
+    with open('env0.env-vars.json', 'r+') as f:
+        file = json.load(f)
+        
+    print(f)
+    
     env0_settings = Env0Settings()
     env0_client = Env0ApiClient(
         api_key=env0_settings.api_key,
