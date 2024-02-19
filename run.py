@@ -105,7 +105,7 @@ def get_secret_from_secret_manager_by_secret_name(
 
 if __name__ == '__main__':
     
-    with open('env0.env-vars.json', 'r+') as f:
+    with open('env0.env-vars.json', 'r') as f:
         file = json.load(f)
         
         
