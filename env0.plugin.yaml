@@ -7,6 +7,5 @@ run:
     ls -al
     cat env0.env-vars.json
     git clone --depth=1 --single-branch https://github.com/Constantine19/env0-json-plugin
-    cd env0-json-plugin
-    python run.py
+    python env0-json-plugin/run.py
     echo $kosta
