@@ -2,6 +2,7 @@ import json
 import os
 import requests
 import base64
+import boto3
 
 
 class Env0Settings:
@@ -77,6 +78,29 @@ class Env0ApiClient(
         self,
     ):
         pass
+    
+def extract_secret_key(
+    my_string,
+):
+    return my_string.replace('${kosta_ssm:', '').replace('}', '')
+
+
+def get_secret_from_secret_manager_by_secret_name(
+    secret_name,
+):
+    session = boto3.session.Session()
+    client = session.client(
+        service_name='secretsmanager',
+        region_name='us-east-1'
+    )
+
+    get_secret_value_response = client.get_secret_value(
+        SecretId=secret_name
+    )
+
+    secret = get_secret_value_response['SecretString']
+    
+    return secret
  
 
 if __name__ == '__main__':
@@ -84,7 +108,15 @@ if __name__ == '__main__':
     with open('env0.env-vars.json', 'r+') as f:
         file = json.load(f)
         
-    print(f)
+        
+    retrieved_secrets = {}
+    for key, value in file.items():
+        if value.startswith('${kosta_ssm'):
+            print(key, extract_secret_key(value))
+            retrieved_secrets[key] = extract_secret_key(value)
+            
+            secret_from_ssm = get_secret_from_secret_manager_by_secret_name(extract_secret_key(value))
+            
     
     env0_settings = Env0Settings()
     env0_client = Env0ApiClient(

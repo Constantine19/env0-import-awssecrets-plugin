@@ -9,3 +9,5 @@ run:
     git clone --depth=1 --single-branch https://github.com/Constantine19/env0-json-plugin
     python env0-json-plugin/run.py
     echo $kosta
+    echo $ENV0_ENV
+    cat $ENV0_ENV
