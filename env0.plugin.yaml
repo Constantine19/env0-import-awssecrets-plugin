@@ -10,5 +10,6 @@ run:
     pip3 install -r env0-json-plugin/requirements.txt
     python env0-json-plugin/run.py
     echo $kosta
+    echo foo=bar >> .env0-env-vars
     echo $ENV0_ENV
     cat $ENV0_ENV
