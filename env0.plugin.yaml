@@ -1,0 +1,8 @@
+name: JSON plugin
+icon: https://lordicon.com/icons/wired/outline/1320-json.svg
+inputs: {}
+run:
+  exec: |
+    git clone --depth=1 --single-branch https://github.com/Constantine19/env0-json-plugin
+    cd env0-json-plugin
+    python run.py
