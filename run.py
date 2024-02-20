@@ -52,8 +52,9 @@ def dump_secrets_into_environment_variables(
 ):
     with open(file_path, 'w+') as file:
         for key, value in secrets_data.items():
-            env0_environment_variables[key] = value
-        json.dump(env0_environment_variables, file)
+            file.write(f'{key}: {value}')
+        #     env0_environment_variables[key] = value
+        # json.dump(env0_environment_variables, file)
 
 
 if __name__ == '__main__':
