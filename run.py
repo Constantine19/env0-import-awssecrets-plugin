@@ -9,9 +9,10 @@ def extract_secret_key(
     prefix_embedded_value,
     prefix,
 ):
-    pattern = re.compile(re.escape(prefix) + r":([^}]+)")
-    match = pattern.search(prefix_embedded_value)
-    return match.group(1) if match else ''
+    pattern = rf'\$\{{{prefix}:(.*?)\}}'
+    match = re.findall(pattern, prefix_embedded_value)
+
+    return match
 
 def get_env0_environment_variables(
     file_path,
@@ -55,6 +56,7 @@ def dump_secrets_into_environment_variables(
             file.write(f'{key}: {value}')
         #     env0_environment_variables[key] = value
         # json.dump(env0_environment_variables, file)
+        # dump into env0_env only retrieved secrets
 
 
 if __name__ == '__main__':
@@ -70,7 +72,7 @@ if __name__ == '__main__':
     )
     retrieved_secrets = get_secret_variables_by_prefix(
         variables=env0_environment_variables,
-        prefix='${kosta_ssm',
+        prefix='kosta_ssm',
         aws_region='us-east-1',
     )
     
