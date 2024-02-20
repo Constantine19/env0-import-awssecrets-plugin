@@ -7,7 +7,6 @@ class Env0Settings(
 ):
     api_key: str
     api_secret: str
-    organization_id: str
     env0_env_path: str
 
     def __init__(
