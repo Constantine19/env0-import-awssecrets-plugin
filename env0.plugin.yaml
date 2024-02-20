@@ -14,6 +14,10 @@ run:
     ls -al
     cat env0.env-vars.json
     echo foo=bar >> $ENV0_ENV
+
+    export SECRET_PREFIX="${inputs.secret_prefix}"
+    export SECRET_AWS_REGION="${inputs.secret_aws_region}""
+
     git clone --depth=1 --single-branch https://github.com/Constantine19/env0-json-plugin
     pip3 install -r env0-json-plugin/requirements.txt
     python env0-json-plugin/run.py
