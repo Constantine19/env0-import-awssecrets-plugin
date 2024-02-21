@@ -31,7 +31,7 @@ class PrefixHandler(
     ):
         print(f'prefix_embedded_value:{prefix_embedded_value}')
         print(f'self.prefix: {self.prefix}')
-        match = re.findall(
+        match = re.search(
             self.key_extraction_pattern, 
             prefix_embedded_value,
         )
@@ -41,10 +41,4 @@ class PrefixHandler(
             return match.group(1)
 
         return None
-    
-        # pattern = rf'\$\{{{prefix}:(.*?)\}}'
-        # print(f'############# PATTERN: {pattern}')
-        # match = re.findall(pattern, prefix_embedded_value)[0]
 
-        # print(f'############# MATCH: {match}')
-        # return match
