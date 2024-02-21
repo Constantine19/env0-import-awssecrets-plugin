@@ -9,13 +9,25 @@ def extract_secret_key(
     prefix_embedded_value,
     prefix,
 ):
-    
     pattern = rf'\$\{{{prefix}:(.*?)\}}'
     print('############# PATTERN: {pattern}')
     match = re.findall(pattern, prefix_embedded_value)
 
     print('############# MATCH: {match}')
     return match
+
+def is_prefixed(
+    value,
+    prefix,
+):
+    pattern = r'\$\{([^:]+):[^}]*\}'
+    match = re.match(pattern, value)
+    if match:
+        extracted_prefix = match.group(1)
+        return extracted_prefix == prefix
+
+    return False
+    
 
 def get_env0_environment_variables(
     file_path,
@@ -38,7 +50,7 @@ def get_secret_variables_by_prefix(
     print(' Secrets Manager inited')
     print(f'variables: {variables}')
     for key, value in variables.items():
-        if value.startswith(prefix):
+        if is_prefixed(value, prefix):
             print(
                 f'Found secret matching prefix "{prefix}" - {key}:{value}',
             )
