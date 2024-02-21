@@ -67,6 +67,10 @@ if __name__ == '__main__':
         
     # env0_variables = Env0Variables()
     
+    print(f'########### env0_variables {env0_variables} ############')
+    
+    print(f'########### env0_variables {env0_variables.env0_env_path} ############')
+    
     env0_environment_variables = get_env0_environment_variables(
         file_path=env0_variables.env0_env_path,
     )
