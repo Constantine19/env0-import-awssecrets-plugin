@@ -43,21 +43,27 @@ def get_secret_variables_by_prefix(
 
 if __name__ == '__main__':
     env0_variables = models.env0_settings.Env0Settings()
+    print(f"env0_variables: {env0_variables}")
     
     env0_environment_variables_json_file_handler = handlers.file_handler.FileHandler(
         file_path=env0_variables.env0_env_path_json_file,
     )
+    print(f"env0_environment_variables_json_file_handler: {env0_environment_variables_json_file_handler}")
+    
     env0_environment_variables_json_data = env0_environment_variables_json_file_handler.read_json()
+    print(f"env0_environment_variables_json_data: {env0_environment_variables_json_data}")
     
     retrieved_secrets = get_secret_variables_by_prefix(
         variables=env0_environment_variables_json_data,
         prefix=SECRET_PREFIX,
         aws_region=SECRET_AWS_REGION,
     )
+    print(f"retrieved_secrets: {retrieved_secrets}")
     
     secrets_file_handler = handlers.file_handler.FileHandler(
         file_path=env0_variables.env0_env_path,
     )
-    secrets_file_handler.write_secrets(
-        retrieved_secrets,
-    )
+    print(f"secrets_file_handler: {secrets_file_handler}")
+    
+    secrets_file_handler.write_secrets(retrieved_secrets)
+    print("Secrets written to file.")
