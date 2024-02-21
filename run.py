@@ -80,14 +80,20 @@ if __name__ == '__main__':
     
     print(f'########### env0_variables.env0_env_path_json_file {env0_variables.env0_env_path_json_file} ############')
     
+    
+    print(f'########### getting env0_environment_variables ############')
     env0_environment_variables = get_env0_environment_variables(
         file_path=env0_variables.env0_env_path_json_file,
     )
+    print(f'########### env0_environment_variables {env0_environment_variables}############')
+    
+    print(f'########### getting retrieved_secrets ############')
     retrieved_secrets = get_secret_variables_by_prefix(
         variables=env0_environment_variables,
         prefix='kosta_ssm',
         aws_region='us-east-1',
     )
+    print(f'########### retrieved_secrets {retrieved_secrets} ############')
     
     dump_secrets_into_environment_variables(
         file_path=env0_variables.env0_env_path,
