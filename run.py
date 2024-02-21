@@ -69,10 +69,12 @@ if __name__ == '__main__':
     
     print(f'########### env0_variables {env0_variables} ############')
     
-    print(f'########### env0_variables {env0_variables.env0_env_path} ############')
+    print(f'########### env0_variables.env0_env_path {env0_variables.env0_env_path} ############')
+    
+    print(f'########### env0_variables.env0_env_path_json_file {env0_variables.env0_env_path_json_file} ############')
     
     env0_environment_variables = get_env0_environment_variables(
-        file_path=env0_variables.env0_env_path,
+        file_path=env0_variables.env0_env_path_json_file,
     )
     retrieved_secrets = get_secret_variables_by_prefix(
         variables=env0_environment_variables,
