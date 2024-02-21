@@ -3,31 +3,8 @@ import re
 
 import clients
 import models
+import handlers
 
-    
-def extract_secret_key(
-    prefix_embedded_value,
-    prefix,
-):
-    pattern = rf'\$\{{{prefix}:(.*?)\}}'
-    print(f'############# PATTERN: {pattern}')
-    match = re.findall(pattern, prefix_embedded_value)[0]
-
-    print(f'############# MATCH: {match}')
-    return match
-
-def is_prefixed(
-    value,
-    prefix,
-):
-    pattern = r'\$\{([^:]+):[^}]*\}'
-    match = re.match(pattern, value)
-    if match:
-        extracted_prefix = match.group(1)
-        return extracted_prefix == prefix
-
-    return False
-    
 
 def get_env0_environment_variables(
     file_path,
@@ -49,12 +26,14 @@ def get_secret_variables_by_prefix(
     )
     print(' Secrets Manager inited')
     print(f'variables: {variables}')
+    
+    prefix_handler = handlers.prefix_handler.PrefixHandler(prefix)
     for key, value in variables.items():
-        if is_prefixed(value, prefix):
+        if prefix_handler.is_prefixed(value):
             print(
                 f'Found secret matching prefix "{prefix}" - {key}:{value}',
             )
-            secret_key = extract_secret_key(
+            secret_key = prefix_handler.extract_secret_key(
                 prefix_embedded_value=value,
                 prefix=prefix,
             )
