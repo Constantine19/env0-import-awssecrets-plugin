@@ -20,9 +20,13 @@ class AwsSecretsManagerApiClient(
         self,
         secret_key,
     ):
+        print('############ Getting secret')
         get_secret_value_response = self.client.get_secret_value(
             SecretId=secret_key
         )
+        print(f'############ get_secret_value_response: {get_secret_value_response}')
         secret = get_secret_value_response['SecretString']
+        
+        print(f'############ secret: {secret}')
         
         return secret
