@@ -11,7 +11,7 @@ class Env0Settings(
     def env0_env_path_json_file(
         self,
     ):
-        return f'{self.env0_env_path}.json'
+        return f'env0.env-vars.json'
 
     def __init__(
         __pydantic_self__,
