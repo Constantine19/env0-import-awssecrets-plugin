@@ -23,7 +23,7 @@ class AwsSecretsManagerApiClient(
         secret_key,
     ):
         print(
-            f'Getting a secret by key {secret_key}'
+            f'Getting a secret by key "{secret_key}"'
         )
         try:
             get_secret_value_response = self.client.get_secret_value(

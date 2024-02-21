@@ -52,7 +52,7 @@ if __name__ == '__main__':
     print('Retrieving variables from env0.env-vars.json')
     env0_environment_variables_json_data = env0_environment_variables_json_file_handler.read_json()
     
-    print(f'Retrieving secrets with the prefix {SECRET_PREFIX} from "env0.env-vars.json" file')
+    print(f'Retrieving secrets with the prefix "{SECRET_PREFIX}" from "env0.env-vars.json" file')
     retrieved_secrets = get_secret_variables_by_prefix(
         variables=env0_environment_variables_json_data,
         prefix=SECRET_PREFIX,
@@ -65,6 +65,6 @@ if __name__ == '__main__':
     secrets_file_handler = handlers.file_handler.FileHandler(
         file_path=env0_variables.env0_env_path,
     )
-    print("Writing secrets to file")
+    print("Writing secrets to ENV0_ENV")
     secrets_file_handler.write_secrets(retrieved_secrets)
-    print("Successfully written secrets to file")
+    print("Successfully written secrets to ENV0_ENV")
