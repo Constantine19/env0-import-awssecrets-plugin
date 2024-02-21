@@ -1,4 +1,3 @@
-import json
 import os
 
 import clients
@@ -24,13 +23,15 @@ def get_secret_variables_by_prefix(
         if prefix_handler.is_prefixed(value):
             print(
                 f'Found secret matching prefix '
-                '"{prefix}" - {key}:{value}'
+                f'"{prefix}" - {key}:{value}'
             )
             try:
                 secret_key = prefix_handler.extract_secret_key(
                     prefix_embedded_value=value,
                 )
+                print(f'extracted key: {secret_key}')
                 secret_value = secrets_manager_client.get_secret_value_by_key(secret_key)
+                print(f'secret_value: {secret_value}')
                 secret_variables_by_prefix[secret_key] = secret_value
             except Exception as e:
                 print(
