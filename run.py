@@ -35,7 +35,6 @@ def get_secret_variables_by_prefix(
             )
             secret_key = prefix_handler.extract_secret_key(
                 prefix_embedded_value=value,
-                prefix=prefix,
             )
             secret_value = secrets_manager_client.get_secret_value_by_key(secret_key)
             secrets[secret_key] = secret_value
