@@ -1,13 +1,13 @@
 name: JSON plugin
 icon: https://lordicon.com/icons/wired/outline/1320-json.svg
-inputs: {
+inputs:
   secret_prefix:
     description: The secret prefix to recognize the secret format
     required: true
   secret_aws_region:
     description: AWS region where secrets live
     required: true
-}
+
 run:
   exec: |
     echo $kosta
