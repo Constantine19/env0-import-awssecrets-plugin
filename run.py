@@ -51,9 +51,16 @@ def dump_secrets_into_environment_variables(
     secrets_data,
     env0_environment_variables
 ):
+    print('##########dumping into env0_env')
+    
+    print(f'ENV VARIABLES {env0_environment_variables}')
+    
+    print(f'secrets_data {secrets_data}')
     with open(file_path, 'w+') as file:
         for key, value in secrets_data.items():
             file.write(f'{key}: {value}')
+            
+            
         #     env0_environment_variables[key] = value
         # json.dump(env0_environment_variables, file)
         # dump into env0_env only retrieved secrets
