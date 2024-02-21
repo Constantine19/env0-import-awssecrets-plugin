@@ -1,3 +1,5 @@
+import botocore
+
 from . import _boto3_client
 
 
@@ -20,13 +22,16 @@ class AwsSecretsManagerApiClient(
         self,
         secret_key,
     ):
-        print('############ Getting secret')
-        get_secret_value_response = self.client.get_secret_value(
-            SecretId=secret_key
+        print(
+            f'Getting a secret by key {secret_key}'
         )
-        print(f'############ get_secret_value_response: {get_secret_value_response}')
-        secret = get_secret_value_response['SecretString']
-        
-        print(f'############ secret: {secret}')
-        
+        try:
+            get_secret_value_response = self.client.get_secret_value(
+                SecretId=secret_key
+            )
+        except botocore.exceptions.ClientError as e:
+            raise(e)
+        else:
+            secret = get_secret_value_response['SecretString']
+            
         return secret

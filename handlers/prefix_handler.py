@@ -29,16 +29,16 @@ class PrefixHandler(
         self, 
         prefix_embedded_value,
     ):
-        print(f'prefix_embedded_value:{prefix_embedded_value}')
-        print(f'self.prefix: {self.prefix}')
         match = re.search(
             self.key_extraction_pattern, 
             prefix_embedded_value,
         )
-        print(f'match:{match}')
+        
         if match:
-            print(f'match.group(1): {match.group(1)}')
             return match.group(1)
 
+        print(
+            f'No extraction matches by prefix "{self.prefix}" '
+            f'for string "{prefix_embedded_value}"'
+        )
         return None
-
