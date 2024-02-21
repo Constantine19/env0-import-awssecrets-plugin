@@ -31,10 +31,12 @@ def get_secret_variables_by_prefix(
     aws_region,
 ):
     secrets = {}
+    print('Calling Secrets Manager')
     secrets_manager_client = clients.aws_secrets_manager_client.AwsSecretsManagerApiClient(
         region=aws_region,
     )
-    
+    print(' Secrets Manager inited')
+    print(f'variables: {variables}')
     for key, value in variables.items():
         if value.startswith(prefix):
             print(
