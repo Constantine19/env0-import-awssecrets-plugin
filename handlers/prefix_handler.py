@@ -30,6 +30,7 @@ class PrefixHandler(
         prefix_embedded_value,
     ):
         print(f'prefix_embedded_value:{prefix_embedded_value}')
+        print(f'self.prefix: {self.prefix}')
         match = re.search(
             self.key_extraction_pattern, 
             prefix_embedded_value,
