@@ -10,17 +10,44 @@ inputs:
 
 run:
   exec: |
-    echo $kosta
+    # Initial environment variable check
+    echo "Initial value of kosta: $kosta"
     ls -al
+
+    # Display the contents of the env0.env-vars.json file
+    echo "Displaying contents of env0.env-vars.json:"
     cat env0.env-vars.json
+
+    # Append foo=bar to the environment variable file pointed by $ENV0_ENV
+    echo "Appending foo=bar to the file pointed by ENV0_ENV"
     echo foo=bar >> $ENV0_ENV
 
+    # Export SECRET_PREFIX and SECRET_AWS_REGION from inputs
+    echo "Exporting secret prefix and AWS region"
     export SECRET_PREFIX="${inputs.secret_prefix}"
+    echo "SECRET_PREFIX set to: $SECRET_PREFIX"
     export SECRET_AWS_REGION="${inputs.secret_aws_region}"
+    echo "SECRET_AWS_REGION set to: $SECRET_AWS_REGION"
 
+    export
+
+    # Cloning the repository
+    echo "Cloning repository"
     git clone --depth=1 --single-branch https://github.com/Constantine19/env0-json-plugin
+    echo "Repository cloned successfully"
+
+    # Installing dependencies
+    echo "Installing dependencies from requirements.txt"
     pip3 install -r env0-json-plugin/requirements.txt
+    echo "Dependencies installed successfully"
+
+    # Running the Python script
+    echo "Running the Python script"
     python env0-json-plugin/run.py
-    echo $kosta
-    echo $ENV0_ENV
+    echo "Python script execution complete"
+
+    # Echoing the values of kosta and ENV0_ENV after script execution
+    echo "Final value of kosta: $kosta"
+    echo "Final value of ENV0_ENV: $ENV0_ENV"
+    echo "Contents of the file pointed by ENV0_ENV:"
     cat $ENV0_ENV
