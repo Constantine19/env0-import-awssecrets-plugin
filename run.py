@@ -9,9 +9,12 @@ def extract_secret_key(
     prefix_embedded_value,
     prefix,
 ):
+    
     pattern = rf'\$\{{{prefix}:(.*?)\}}'
+    print('############# PATTERN: {pattern}')
     match = re.findall(pattern, prefix_embedded_value)
 
+    print('############# MATCH: {match}')
     return match
 
 def get_env0_environment_variables(
