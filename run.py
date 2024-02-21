@@ -10,10 +10,10 @@ def extract_secret_key(
     prefix,
 ):
     pattern = rf'\$\{{{prefix}:(.*?)\}}'
-    print('############# PATTERN: {pattern}')
-    match = re.findall(pattern, prefix_embedded_value)
+    print(f'############# PATTERN: {pattern}')
+    match = re.findall(pattern, prefix_embedded_value)[0]
 
-    print('############# MATCH: {match}')
+    print(f'############# MATCH: {match}')
     return match
 
 def is_prefixed(
